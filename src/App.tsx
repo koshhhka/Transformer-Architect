@@ -1,7 +1,7 @@
 import './App.css'
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Level1 from './screens/Level1';
+import Level1 from './screens/Level1/Level1';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 
 const App: React.FC = () => {

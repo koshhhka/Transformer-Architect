@@ -1,0 +1,35 @@
+.logoImage {
+
+}
+.homescreen {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 600px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.logo {
+    color: #FE8AFE;
+    font-family: Zen Tokyo Zoo;
+    font-size: 100px;
+    font-weight: 400;
+    line-height: 120px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  
+}
+
+.togame {
+  border-radius: 0px;
+  transform: skewX(-20deg);
+  font-family: Tektur;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 65px;
+  text-align: left;
+  text-decoration-skip-ink: none;
+}  

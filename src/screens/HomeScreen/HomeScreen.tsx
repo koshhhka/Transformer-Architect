@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-
+import "./HomeScreen.css"
 const HomeScreen = () => {
     return (
       <div className='homescreen'>
-        <img src='/src/assets/logo.png'/>
+        <img className='logoImage' src='/src/assets/logo.png'/>
         <h1 className='logo'>AI-MERGE</h1>
         <Link to="/level1">
-          <button className='togame'>Перейти на второй экран</button>
+          <button className='togame'> Играть</button>
         </Link>
       </div>
     );
