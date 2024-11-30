@@ -6,7 +6,7 @@ const HomeScreen = () => {
         <img className='logoImage' src='/src/assets/logo.png'/>
         <h1 className='logo'>AI-MERGE</h1>
         <Link to="/level1">
-          <button className='togame'> Играть</button>
+          <button className='togame'> <p>Играть</p> </button>
         </Link>
       </div>
     );

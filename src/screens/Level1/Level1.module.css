@@ -9,7 +9,36 @@ u{
   text-decoration: none;
   color: #FE8AFE;
 }
+
+.homebutton {
+  display: inline;
+}
+
+.levelheader {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 73px;
+}
+
+.homebutton {
+  display: inline-block;
+}
+
+.questionbutton {
+  display: inline;
+  margin-right: 72px;
+}
+
+.settingsbutton {
+  display: inline;
+}
+
+.questionsettings {
+  display: flex;
+  align-items: center;
+}
 .numoflevel {
+  display: inline-block;
   margin-top: 45px;
   margin-bottom: 0px;
   font-family: Tektur;
@@ -105,21 +134,52 @@ u{
   background-image: url('/src/assets/encoder.svg');
   background-repeat: no-repeat;
   position: relative;
-  align-items: center;
+  /* align-items: center; */
+  display: flex;
+
+}
+
+.invblocksgroup {
+  display: flex;
+  flex-direction: column;
 }
 
 .invisibleblock1 {
-  
+  margin-top: 190px;
+  margin-left: 5px;
+  width: 29px;
+  height: 29px;
 }
 
-.container3{
+.invisibleblock3 {
+  margin-top: 55px;
+  margin-left: 88px;
+  width: 73px;
+  height: 29px;
+}
+
+.invisibleblock2 {
+  margin-top: 210px;
+  margin-left: 5px;
+}
+.invisibleblock2 {
+  width: 103px;
+  height: 52px;
+}
+.container3 {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+.container3_1{
   padding: 15px 0;
   align-items: center;
   display: flex;
   flex-direction: column;
   width: 280px;
   min-height: 540px;
-  gap: 0px;
+  gap: 40px;
   border: 2px solid #FE8AFE;
   border-radius: 10px;
   opacity: 0px;
@@ -127,6 +187,7 @@ u{
 }
 
 .textstyle {
+  max-width: 103px;
   gap: 20px;
   font-family: Tektur;
   font-size: 20px;
@@ -138,8 +199,8 @@ u{
 }
 
 .block1 {
-  margin-top: 28.84px;
-  margin-left: 138.79px;
+  margin-top: 28px;
+  margin-left: 40px;
   margin-bottom: 15px;
   border-radius: 4px;
   opacity: 0px;
@@ -150,7 +211,7 @@ u{
 }
 
 .block2 {
-  margin-left: 138.79px;
+  margin-left: 40px;
   margin-bottom: 42px;
   border-radius: 4px;
   opacity: 0px;
@@ -161,7 +222,7 @@ u{
 }
 
 .block3 {
-  margin-left: 138.79px;
+  margin-left: 40px;
   margin-bottom: 27px;
   border-radius: 4px;
   opacity: 0px;
@@ -172,7 +233,7 @@ u{
 }
   
 .block4 {
-  margin-left: 138.79px;
+  margin-left: 40px;
   margin-bottom: 180px;
   border-radius: 4px;
   opacity: 0px;
@@ -183,7 +244,7 @@ u{
 }
 
 .block5 {
-  margin-left: 138.79px;
+  margin-left: 40px;
   border-radius: 4px;
   opacity: 0px;
   height: 60px;
