@@ -11,9 +11,14 @@ u{
 }
 
 .homebutton {
-  display: inline;
+  position: relative;
 }
 
+.homebuttonLink {
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
 .levelheader {
   display: flex;
   justify-content: space-between;
@@ -21,7 +26,7 @@ u{
 }
 
 .homebutton {
-  display: inline-block;
+  display: inline;
 }
 
 .questionbutton {
@@ -29,8 +34,13 @@ u{
   margin-right: 72px;
 }
 
-.settingsbutton {
+.levelsbutton {
   display: inline;
+}
+
+.homeconteiner {
+  display: flex;
+  align-items: center;
 }
 
 .questionsettings {
@@ -131,7 +141,7 @@ u{
 .container2 {
   width: 383.06px;
   height: 659.66px;
-  background-image: url('/src/assets/encoder.svg');
+  background-image: url('/src/assets/encoder1.svg');
   background-repeat: no-repeat;
   position: relative;
   /* align-items: center; */
@@ -142,6 +152,10 @@ u{
 .invblocksgroup {
   display: flex;
   flex-direction: column;
+  margin-left: 75px;
+  margin-top: 25px;
+  /* margin-left: 100px;
+  margin-top: 50px; */
 }
 
 .invisibleblock1 {
@@ -251,4 +265,42 @@ u{
   width: 170px;
   background-color: #1F0232;
   border: 2px solid white;
+}
+
+.evenBlock {
+  width: 185px;
+  height: 41px;
+  border-radius: 8px;
+  border: 3px solid #fff;
+  background-color: #1F0232;
+  margin-bottom: 9px;
+}
+
+.oddBlock {
+  border: 3px solid #fff;
+  background-color: #1F0232;
+  width: 185px;
+  height: 77px;
+  border-radius: 8px;
+  margin-bottom: 35px;
+}
+
+.dropped {
+  display: block;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 150px;
+  max-height: 40px;
+  gap: 0px;
+  border-radius: 4px;
+  opacity: 0px;
+  padding: 6px 10px;
+  font-family: Tektur;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: center;
+  text-wrap: wrap;
+  text-decoration-skip-ink: none;
+  color: white;
 }

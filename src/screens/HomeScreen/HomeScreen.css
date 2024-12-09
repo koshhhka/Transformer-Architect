@@ -1,21 +1,33 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+:root {
+  min-height: 100%;
+}
+
 .homescreen {
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 800px;
-  /* height: 600px; */
 }
 
 .logo {
     color: #FE8AFE;
     font-family: Zen Tokyo Zoo;
-    font-size: 100px;
+    font-size: 150px;
     font-weight: 400;
     line-height: 120px;
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-  
+    margin-top: 60px;
+    margin-bottom: 50px;
 }
 
 .togame {
@@ -27,4 +39,47 @@
   line-height: 65px;
   text-align: left;
   text-decoration-skip-ink: none;
-}  
+  /* width: 454.96px;
+  height: 102.73px;
+  top: 649px;
+  left: 718px;
+  border: 2px; */
+} 
+
+.togame {
+  display: inline-block;
+  position: relative;
+  padding: 15px 90px;
+  background: #4C024C;
+  color: #fff;
+  font-family: Tektur;
+  font-size: 75px;
+  text-align: center;
+  cursor: pointer;
+  border: 3px solid #FE8AFE;
+  transform: skew(-25deg); 
+  margin-bottom: 30px;
+}
+
+.togame span {
+  display: inline-block;
+  transform: skew(25deg); 
+}
+
+.tolevels {
+  display: inline-block;
+  background-color: #330033;
+  border: 3px solid #FE8AFE;
+  color: #fff;
+  padding: 5px 30px;
+  transform: skew(-25deg);
+  font-family: Tektur;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 52px;
+}
+
+.tolevels span {
+  display: inline-block;
+  transform: skew(25deg)
+}

@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Level1 from './screens/Level1/Level1';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
+import Level2 from './screens/Level2/Level2';
 
 const App: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomeScreen/>} />
           <Route path="/level1" element={<Level1 />} />
-          <Route path="/level2" element={<ThirdScreen />} />
+          <Route path="/level2" element={<Level2 />} />
         </Routes>
       </Router>
     </div>
@@ -19,16 +20,6 @@ const App: React.FC = () => {
   );
 };
 
-
-
-
-const ThirdScreen = () => {
-  return (
-    <div>
-      <h1>Третий экран</h1>
-    </div>
-  );
-};
 
 // interface Props {
 //   handleButtonClick?: () => void;

@@ -1,81 +1,150 @@
 import { Link } from "react-router-dom";
 import styles from "./Level1.module.css"
+import { useDrag } from "react-dnd";
+import { useDrop } from "react-dnd";
+import { useState } from "react";
+
+interface DragBlockProps {
+  id: string;
+  text: string;
+}
+
+const DragBlock: React.FC<DragBlockProps> = ({ id, text }) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: id,
+    item: { id, text },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
+  return (
+    <div className={styles.block}
+      ref={drag}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: "move"
+      }}
+    >
+      {text}
+    </div>
+  );
+};
+
+const allowedMappings: Record<string, string[]> = {
+  block1: ["drop2", "drop4"],
+  block2: ["drop2", "drop4"],
+  block3: ["drop1", "drop3"],
+  block4: ["drop1", "drop3"],
+};
+
+interface DropBlockProps {
+  id: string;
+  className?: string;
+}
+
+const DropBlock: React.FC<DropBlockProps> = ({ id, className }) => {
+  const [droppedItem, setDroppedItem] = useState<string | null>(null);
+  const [customBackground, setCustomBackground] = useState<string | null>(null);
+
+  // Функция для определения цвета по тексту
+  const getColorByText = (text: string): string => {
+    switch (text) {
+      case "Multi-Head Attention":
+        return "#CD00A0";
+      case "Feed Forward":
+        return "#02ABBE";
+      case "Add & Norm":
+        return "#8C06BE";
+      default:
+        return "";
+    }
+  };
+
+  const [, drop] = useDrop(() => ({
+    accept: Object.keys(allowedMappings), // Принимаем все DragBlock
+    drop: (item: { id: string; text: string }) => {
+      if (allowedMappings[item.id]?.includes(id)) {
+        setDroppedItem(item.text);
+        setCustomBackground(getColorByText(item.text));
+      } else {
+        // Можно добавить уведомление или индикацию об ошибке
+        console.error("Неправильное место для этого блока!");
+      }
+    },
+    canDrop: (item: { id: string; text: string }) =>
+      allowedMappings[item.id]?.includes(id), // Проверяем, подходит ли DragBlock
+  }));
+
+  return (
+    <div
+      ref={drop}
+      style={{backgroundColor: customBackground || undefined}}
+      className={`${className} ${droppedItem ? styles.dropped : ""}`}
+    >
+      {droppedItem}
+    </div>
+  );
+};
 
 interface Block {
-  id?: string,
-  text: string
+  id: string | undefined; // id может быть undefined
+  text: string;
 }
 
 const blocks: Block[] = [
-  {id: 'block1', text: 'Multi-Head Attention'},
-  {id: 'block2', text: 'Input Embedding'},
-  {id: 'block3', text: 'Feed Forward'},
-  {id: 'block4', text: 'Add & Norm'},
-  {id: 'block5', text: 'Add & Norm'}
-  // {id: 'block3', text: 'Feed Forward', className: 'block5 color5 textstyle fill'},
-  // {id: 'block4', text: 'Add & Norm', className: 'block1 color1 textstyle fill'},
-  // {id: 'block5', text: 'Add & Norm', className: 'block3 color3 textstyle fill'},
-]
+  { id: "block1", text: "Multi-Head Attention" },
+  { id: "block2", text: "Feed Forward" },
+  { id: "block3", text: "Add & Norm" },
+  { id: "block4", text: "Add & Norm" },
+];
 
-
-const DragBlock = ({text}: Block) => {
+const Level1: React.FC = () => {
   return (
-    <div className={styles.block}>
-      {text}
-    </div>
-  )
-}
-const Level1 = () => {
-    return (
-      <div>
-        <header className={styles.levelheader}>
-          <img src="/src/assets/homebutton.svg" className={styles.homebutton}></img>
-          <p className={styles.numoflevel}>Уровень 1</p>
-          <div className={styles.questionsettings}>
-            <img src="/src/assets/question.svg" className={styles.questionbutton}></img>
-            <img src="/src/assets/settings.svg" className={styles.settingsbutton}></img>
-          </div>
-        </header>
-        <p className={styles.descroflevel}>Собери блок <u>encoder</u>, чтобы подготовить текстовые данные</p>
-        <div className={styles.maincontainer}>
-          <div className={styles.container1}>
-            <p className={styles.containername}>Перенести блоки в пустые ячейки</p>
-            <DragBlock text={blocks[0].text}/>
-            <DragBlock text={blocks[1].text}/>
-            <DragBlock text={blocks[2].text}/>
-            <DragBlock text={blocks[3].text}/>
-            <DragBlock text={blocks[4].text}/>
-          </div>
-    
-
-          <div className={styles.container2}>
-            <div className={styles.invblocksgroup}>
-              <div className={styles.invisibleblock1}></div>
-              <div className={styles.invisibleblock2}></div>
-            </div>
-            <div>
-              <div className={styles.block1}></div>
-              <div className={styles.block2}></div>
-              <div className={styles.block3}></div>
-              <div className={styles.block4}></div>
-              <div className={styles.block5}></div>
-              <div className={styles.invisibleblock3}></div>
-            </div>
-          </div>
-
-
-          <div className={styles.container3}>
-            <div className={styles.container3_1}>
-              <p className={styles.containername}>Перенести текст на места пропусков</p>
-              <div className={styles.textstyle}>Position encodings</div>
-              <div className={styles.textstyle}>Inputs</div>
-              <div className={styles.textstyle}>Nx</div>
-            </div>
-            <Link to="/level2">
-              <button>Готово</button>
-            </Link>
-          </div>           
+    <div>
+      <header className={styles.levelheader}>
+        <div className={styles.homeconteiner}>
+          <Link to="/">
+            <img src="/src/assets/homebutton.svg" className={styles.homebutton} alt="Home" />
+          </Link>
         </div>
+        <p className={styles.numoflevel}>Уровень 1</p>
+        <div className={styles.questionsettings}>
+          <img src="/src/assets/question.svg" className={styles.questionbutton} alt="Help" />
+          <Link to="/levels">
+            <img src="/src/assets/levels.svg" className={styles.levelsbutton} alt="Levels" />
+          </Link>
+        </div>
+      </header>
+      <p className={styles.descroflevel}>
+        Исходная фраза: "I LOVE DOGS"
+      </p>
+      <div className={styles.maincontainer}>
+        <div className={styles.container1}>
+          <p className={styles.containername}>Перенести блоки в пустые ячейки</p>
+          {blocks.map((block) => (
+            <DragBlock key={block.id ?? 'default-id'} id={block.id ?? 'default-id'} text={block.text} />
+          ))}
+        </div>
+
+        <div className={styles.container2}>
+        <div className={styles.invblocksgroup}>
+          {["drop1", "drop2", "drop3", "drop4"].map((dropId, index) => (
+            <DropBlock
+              key={dropId}
+              id={dropId}
+              className={index % 2 === 0 ? styles.evenBlock : styles.oddBlock}
+            />
+          ))}
+        </div>
+        </div>
+
+        <div className={styles.container3}>
+          <Link to="/level2">
+            <button>Готово</button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
