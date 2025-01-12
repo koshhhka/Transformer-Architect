@@ -6,10 +6,10 @@ import { useState } from "react";
 
 interface DragBlockProps {
   id: string;
-  text: string;
+  text: string
 }
 
-const DragBlock: React.FC<DragBlockProps> = ({ id, text }) => {
+const DragBlock = ({id, text}: DragBlockProps) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: id,
     item: { id, text },
@@ -32,30 +32,39 @@ const DragBlock: React.FC<DragBlockProps> = ({ id, text }) => {
 };
 
 const allowedMappings: Record<string, string[]> = {
-  block1: ["drop2", "drop4"],
-  block2: ["drop2", "drop4"],
-  block3: ["drop1", "drop3"],
-  block4: ["drop1", "drop3"],
+  block1: ["drop1", "drop2", "drop3"],
+  block2: ["drop1", "drop2", "drop3"],
+  block3: ["drop1", "drop2", "drop3"],
+  block4: ["drop4", "drop5", "drop6"],
+  block5: ["drop4", "drop5", "drop6"],
+  block6: ["drop4", "drop5", "drop6"]
 };
 
 interface DropBlockProps {
   id: string;
   className?: string;
+  onDrop?: (item: { id: string; text: string}) => void;
 }
 
-const DropBlock: React.FC<DropBlockProps> = ({ id, className }) => {
+const DropBlock = ({id, className, onDrop}:DropBlockProps)=> {
   const [droppedItem, setDroppedItem] = useState<string | null>(null);
   const [customBackground, setCustomBackground] = useState<string | null>(null);
 
   // Функция для определения цвета по тексту
   const getColorByText = (text: string): string => {
     switch (text) {
-      case "Multi-Head Attention":
+      case "[1.0, 2.3, -0.5]":
         return "#CD00A0";
-      case "Feed Forward":
-        return "#02ABBE";
-      case "Add & Norm":
+      case "[0.8, 1.2, -0.3]":
         return "#8C06BE";
+      case "[0.1, 0.5, 0.8]":
+        return "#051FC3";
+      case "[1.0, 0.0, 0.0]":
+        return "#051FC3";
+      case "[0.0, 1.0, 0.0]":
+        return "#8C06BE";
+      case "[0.7, -3.1, 2.0]":
+        return "#CD00A0";
       default:
         return "";
     }
@@ -67,6 +76,7 @@ const DropBlock: React.FC<DropBlockProps> = ({ id, className }) => {
       if (allowedMappings[item.id]?.includes(id)) {
         setDroppedItem(item.text);
         setCustomBackground(getColorByText(item.text));
+        onDrop?.(item);
       } else {
         // Можно добавить уведомление или индикацию об ошибке
         console.error("Неправильное место для этого блока!");
@@ -87,19 +97,71 @@ const DropBlock: React.FC<DropBlockProps> = ({ id, className }) => {
   );
 };
 
-interface Block {
-  id: string | undefined; // id может быть undefined
+interface Block1 {
+  id: string; // id может быть undefined
   text: string;
 }
 
-const blocks: Block[] = [
-  { id: "block1", text: "Multi-Head Attention" },
-  { id: "block2", text: "Feed Forward" },
-  { id: "block3", text: "Add & Norm" },
-  { id: "block4", text: "Add & Norm" },
+const blocks1: Block1[] = [
+  { id: "block1", text: "[1.0, 2.3, -0.5]" },
+  { id: "block2", text: "[0.8, 1.2, -0.3]" },
+  { id: "block3", text: "[0.1, 0.5, 0.8]" }
 ];
 
-const Level1: React.FC = () => {
+interface Block2 {
+  id: string; // id может быть undefined
+  text: string;
+}
+
+const blocks2: Block2[] = [
+  { id: "block4", text: "[1.0, 0.0, 0.0]" },
+  { id: "block5", text: "[0.0, 1.0, 0.0]" },
+  { id: "block6", text: "[0.7, -3.1, 2.0]" }
+];
+
+interface DroppedItem {
+  id: string; 
+  text: string
+}
+
+const Image =() => {
+  return(
+    <div className={styles.messagegroup}>
+      <div className={styles.messagetextaround}>
+        <div className={styles.messagetext}>
+          Добавьте эмбеддинг и позицию к каждому слову в фразе.
+        </div>
+      </div>
+      <img className={styles.robot} src="/src/assets/robot.svg"></img>
+    </div>
+  )
+}
+
+interface CorrectItem {
+  id: string, 
+  text: string
+}
+
+const correctItems: CorrectItem[] = [
+  {id: "drop1", text: "[1.0, 2.3, -0.5]"},
+  {id: "drop2", text: "[0.8, 1.2, -0.3]"},
+  {id: "drop3", text: "[0.1, 0.5, 0.8]"},
+  {id: "drop4", text: "[1.0, 0.0, 0.0]"},
+  {id: "drop5", text: "[0.0, 1.0, 0.0]"},
+  {id: "drop6", text: "[0.7, -3.1, 2.0]"}
+]
+
+interface Level {
+  setGlobalState: (state: any) => void;
+}
+
+const Level1 = ({}: Level) => {
+  const [droppedBlocks, setDroppedBlocks] = useState<DroppedItem[]>([]);
+
+  const handleDrop = (item: { id: string; text: string}) => {
+    setDroppedBlocks(prev => [...prev, item]);
+  };
+  
   return (
     <div>
       <header className={styles.levelheader}>
@@ -108,7 +170,7 @@ const Level1: React.FC = () => {
             <img src="/src/assets/homebutton.svg" className={styles.homebutton} alt="Home" />
           </Link>
         </div>
-        <p className={styles.numoflevel}>Уровень 1</p>
+        <p className={styles.numoflevel}>Задание 1</p>
         <div className={styles.questionsettings}>
           <img src="/src/assets/question.svg" className={styles.questionbutton} alt="Help" />
           <Link to="/levels">
@@ -120,30 +182,79 @@ const Level1: React.FC = () => {
         Исходная фраза: "I LOVE DOGS"
       </p>
       <div className={styles.maincontainer}>
-        <div className={styles.container1}>
-          <p className={styles.containername}>Перенести блоки в пустые ячейки</p>
-          {blocks.map((block) => (
-            <DragBlock key={block.id ?? 'default-id'} id={block.id ?? 'default-id'} text={block.text} />
-          ))}
+        <div className={styles.container11}>
+          <div className={styles.container1}>
+            <p className={styles.containername}>Эмбединги</p>
+            {blocks1.filter((block) => !droppedBlocks.map(dropped => dropped.id).includes(block.id)).map((block) => (
+              <DragBlock key={block.id ?? 'default-id'} id={block.id ?? 'default-id'} text={block.text} />
+            ))}
+          </div>
+        
+          <div className={styles.container1}>
+            <p className={styles.containername}>Позиции</p>
+            {blocks2.filter((block) => !droppedBlocks.map(dropped => dropped.id).includes(block.id)).map((block) => (
+              <DragBlock key={block.id ?? 'default-id'} id={block.id ?? 'default-id'} text={block.text} />
+            ))}
+          </div>
+        </div>
+        <div>
+        <div className={styles.direction}>
+          <div className={styles.textnames}>
+            <p className={styles.textname}> "I": </p>
+            <p className={styles.textname}> "LOVE": </p>
+            <p className={styles.textname}> "DOGS": </p>
+          </div>
+
+          <div>
+            <div className={styles.nameanswercontainer}> 
+              <p className={styles.text1}> Добавьте эмбеддинг </p>
+              <p className={styles.text2}> Добавьте позиционную кодировку </p>
+            </div>
+          
+            <div className={styles.answercontainer}>
+              <div className={styles.container2}>
+                <div className={styles.invblocksgroup}>
+                  {["drop1", "drop2", "drop3"].map((dropId) => (
+                    <DropBlock
+                      key={dropId}
+                      id={dropId}
+                      className={styles.baseBlock}
+                      onDrop={handleDrop}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.container22}>
+                <div className={styles.invblocksgroup}>
+                  {["drop4", "drop5", "drop6"].map((dropId) => (
+                    <DropBlock
+                      key={dropId}
+                      id={dropId}
+                      className={styles.baseBlock}
+                      onDrop={handleDrop}
+                    />
+                ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.direction2}>
+          <div className={styles.resetbutton}>
+           <button onClick={() => navigate("/level2")} className={styles.toLevel2}>
+              <span>Сбросить</span>
+           </button>
+          </div>
+          <div className={styles.checkbutton}>
+            <button to="/level2" className={styles.toLevel2}>
+             <span>Проверить сброку</span>
+            </button>
+          </div>
+        </div>
         </div>
 
-        <div className={styles.container2}>
-        <div className={styles.invblocksgroup}>
-          {["drop1", "drop2", "drop3", "drop4"].map((dropId, index) => (
-            <DropBlock
-              key={dropId}
-              id={dropId}
-              className={index % 2 === 0 ? styles.evenBlock : styles.oddBlock}
-            />
-          ))}
-        </div>
-        </div>
-
-        <div className={styles.container3}>
-          <Link to="/level2">
-            <button>Готово</button>
-          </Link>
-        </div>
+        <Image></Image>
       </div>
     </div>
   );

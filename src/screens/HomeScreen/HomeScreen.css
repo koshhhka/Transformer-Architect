@@ -67,6 +67,7 @@
 }
 
 .tolevels {
+  text-decoration: none;
   display: inline-block;
   background-color: #330033;
   border: 3px solid #FE8AFE;
