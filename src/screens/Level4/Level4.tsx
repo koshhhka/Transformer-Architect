@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
-import styles from "./Level2.module.css"
+import styles from "./Level4.module.css"
 import {Dispatch, SetStateAction, useState} from "react";
 import {LevelCompletion} from "../../App.tsx";
 import { Block } from "../../types/block.ts";
@@ -9,41 +9,35 @@ import {Image} from "../../components/Image/Image.tsx";
 
 
 const blocks: Block[] = [
-    {id: "block1", text: "Multi-Head Attention", color: "#CD00A0"},
-    {id: "block2", text: "Feed Forward", color: "#02ABBE"},
-    {id: "block3", text: "Add & Norm", color: "#8C06BE"},
-    {id: "block4", text: "Add & Norm", color: "#8C06BE"},
+    {id: "block1", text: "Softmax", color: "#C203C2"},
+    {id: "block2", text: "Linear Layer", color: "#0D88CA"}
 ];
 
 
-interface Level2Props {
+interface Level4Props {
     setGlobalState: Dispatch<SetStateAction<LevelCompletion[]>>
 }
 
-const Level2 = ({setGlobalState}: Level2Props) => {
+const Level4 = ({setGlobalState}: Level4Props) => {
     const navigate = useNavigate();
     const [droppedBlocks, setDroppedBlocks] = useState<Record<string, string>>({}); //slotId, blockId
 
     const correctItems: { slotId: string, blockId: string[] }[] = [
-        {slotId: "drop1", blockId: ["block3", "block4"]},
-        {slotId: "drop2", blockId: ["block2"]},
-        {slotId: "drop3", blockId: ["block3", "block4"]},
-        {slotId: "drop4", blockId: ["block1"]},
+        {slotId: "drop1", blockId: ["block1"]},
+        {slotId: "drop2", blockId: ["block2"]}
     ];
 
     const allowedItems: Record<string, string[]> = {
-        "drop2": ["block1", "block2"],
-        "drop4": ["block1", "block2"],
-        "drop1": ["block3", "block4"],
-        "drop3": ["block3", "block4"]
+        "drop1": ["block1", "block2"],
+        "drop2": ["block1", "block2"]
     };
 
     const handleLevelCompletion = () => {
         const correct = correctItems.filter((item) => item.blockId.includes(droppedBlocks[item.slotId]));
         const completion = correct.length / correctItems.length * 100;
-        setGlobalState((prev) => [...prev, {id: 2, value: completion}]);
-        console.log("Level 2 completed with", completion, "percent");
-        navigate("/level3");
+        setGlobalState((prev) => [...prev, {id: 4, value: completion}]);
+        console.log("Level 4 completed with", completion, "percent");
+        navigate("/level5");
     }
 
     const handleDrop = (item: { slotId: string; dropId: string }) => {
@@ -58,7 +52,7 @@ const Level2 = ({setGlobalState}: Level2Props) => {
                         <img src="/src/assets/homebutton.svg" className={styles.homebutton} alt="Home"/>
                     </Link>
                 </div>
-                <p className={styles.numoflevel}>Задание 2</p>
+                <p className={styles.numoflevel}>Задание 4</p>
                 <div className={styles.questionsettings}>
                     <img src="/src/assets/question.svg" className={styles.questionbutton} alt="Help"/>
                     <Link to="/levels">
@@ -68,10 +62,11 @@ const Level2 = ({setGlobalState}: Level2Props) => {
             </header>
             <p className={styles.descroflevel}>
                 Исходная фраза: "I LOVE DOGS"
+                Output Probabilities
             </p>
             <div className={styles.maincontainer}>
                 <div className={styles.container1}>
-                    <p className={styles.containername}>Блоки энкодера</p>
+                    <p className={styles.containername}>Блоки декодера</p>
                     {blocks.filter((block) => !Object.values(droppedBlocks).includes(block.id)).map((block) => (
                         <DragBlock key={block.id} block={block}/>
                     ))}
@@ -80,7 +75,8 @@ const Level2 = ({setGlobalState}: Level2Props) => {
                 <div className={styles.container22}>
                     <div className={styles.container2}>
                         <div className={styles.invblocksgroup}>
-                            {["drop1", "drop2", "drop3", "drop4"].map((dropId) => (
+                            
+                            {["drop1", "drop2"].map((dropId) => (
                                 <Slot
                                     key={dropId}
                                     id={dropId}
@@ -106,10 +102,10 @@ const Level2 = ({setGlobalState}: Level2Props) => {
                         </div>
                     </div>
                 </div>
-                <Image text={"Разместите блоки в правильном порядке, чтобы собрать энкодер"}/>
+                <Image text={"Соберите блок декодера в правильном порядке"}/>
             </div>
         </div>
     );
 };
 
-export default Level2;
+export default Level4;

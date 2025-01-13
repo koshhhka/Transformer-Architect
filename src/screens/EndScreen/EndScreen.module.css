@@ -1,0 +1,66 @@
+.maincontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gameovertext {
+    display: inline-block;
+    margin-top: 45px;
+    margin-bottom: 0px;
+    font-family: Tektur;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 143px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: white;
+    text-align: center;
+ }
+
+.resulttext {
+    display: inline-block;
+    margin-top: 45px;
+    margin-bottom: 0px;
+    font-family: Tektur;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 143px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: white;
+    text-align: center;
+}
+
+.levelinf {
+    display: inline-block;
+    margin-top: 45px;
+    margin-bottom: 0px;
+    font-family: Tektur;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 143px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: white;
+    text-align: center;
+}
+
+.middleres {
+    display: inline-block;
+    margin-top: 45px;
+    margin-bottom: 0px;
+    font-family: Tektur;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 143px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: white;
+    text-align: center;
+}

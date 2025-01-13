@@ -1,0 +1,18 @@
+.block {
+    display: block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    gap: 0px;
+    border-radius: 4px;
+    opacity: 0;
+    width: 50%;
+    padding: 6px 10px;
+    font-family: Tektur;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26px;
+    text-align: center;
+    text-wrap: wrap;
+    text-decoration-skip-ink: none;
+    color: white;
+}

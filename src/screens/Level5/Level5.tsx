@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import styles from "./Level1.module.css"
+import styles from "./Level5.module.css"
 import {useNavigate} from "react-router-dom";
 import {Dispatch, SetStateAction, useState} from "react";
 import {LevelCompletion} from "../../App.tsx";
@@ -13,7 +13,7 @@ interface Level {
     setGlobalState: Dispatch<SetStateAction<LevelCompletion[]>>
 }
 
-const Level1 = ({setGlobalState}: Level) => {
+const Level5 = ({setGlobalState}: Level) => {
     const [droppedBlocks, setDroppedBlocks] = useState<Record<string, string>>({}); //slotId, blockId
     const navigate = useNavigate();
 
@@ -24,39 +24,27 @@ const Level1 = ({setGlobalState}: Level) => {
     const handleLevelCompletion = () => {
         const correct = correctItems.filter((item) => item.blockId.includes(droppedBlocks[item.slotId]));
         const completion = correct.length / correctItems.length * 100;
-        setGlobalState((prev) => [...prev, {id: 1, value: completion}]);
-        console.log("Level 1 completed with", completion, "percent");
-        navigate("/level2");
+        setGlobalState((prev) => [...prev, {id: 5, value: completion}]);
+        console.log("Level 5 completed with", completion, "percent");
+        navigate("/end");
     }
 
-    const blocks1: Block[] = [
-        {id: "block1", text: "[1.0, 2.3, -0.5]", color: "#CD00A0"},
-        {id: "block2", text: "[0.8, 1.2, -0.3]", color: "#8C06BE"},
-        {id: "block3", text: "[0.1, 0.5, 0.8]", color: "#051FC3"}
-    ];
-
     const blocks2: Block[] = [
-        {id: "block4", text: "[1.0, 0.0, 0.0]", color: "#051FC3"},
-        {id: "block5", text: "[0.0, 1.0, 0.0]", color: "#8C06BE"},
-        {id: "block6", text: "[0.7, -3.1, 2.0]", color: "#CD00A0"}
+        {id: "block1", text: "Я", color: "#CD00A0"},
+        {id: "block2", text: "ЛЮБЛЮ", color: "#8C06BE"},
+        {id: "block3", text: "СОБАК", color: "#051FC3"}
     ];
 
     const allowedItems: Record<string, string[]> = {
         "drop1": ["block1", "block2", "block3"],
         "drop2": ["block1", "block2", "block3"],
-        "drop3": ["block1", "block2", "block3"],
-        "drop4": ["block4", "block5", "block6"],
-        "drop5": ["block4", "block5", "block6"],
-        "drop6": ["block4", "block5", "block6"]
+        "drop3": ["block1", "block2", "block3"]
     };
 
     const correctItems: { slotId: string, blockId: string[] }[] = [
         {slotId: "drop1", blockId: ["block1"]},
         {slotId: "drop2", blockId: ["block2"]},
-        {slotId: "drop3", blockId: ["block3"]},
-        {slotId: "drop4", blockId: ["block4"]},
-        {slotId: "drop5", blockId: ["block5"]},
-        {slotId: "drop6", blockId: ["block6"]}
+        {slotId: "drop3", blockId: ["block3"]}
     ];
 
     return (
@@ -67,7 +55,7 @@ const Level1 = ({setGlobalState}: Level) => {
                         <img src="/src/assets/homebutton.svg" className={styles.homebutton} alt="Home"/>
                     </Link>
                 </div>
-                <p className={styles.numoflevel}>Задание 1</p>
+                <p className={styles.numoflevel}>Задание 5</p>
                 <div className={styles.questionsettings}>
                     <img src="/src/assets/question.svg" className={styles.questionbutton} alt="Help"/>
                     <Link to="/levels">
@@ -81,14 +69,7 @@ const Level1 = ({setGlobalState}: Level) => {
             <div className={styles.maincontainer}>
                 <div className={styles.container11}>
                     <div className={styles.container1}>
-                        <p className={styles.containername}>Эмбединги</p>
-                        {blocks1.filter((block) => !Object.values(droppedBlocks).includes(block.id)).map((block) => (
-                            <DragBlock key={block.id} block={block}/>
-                        ))}
-                    </div>
-
-                    <div className={styles.container1}>
-                        <p className={styles.containername}>Позиции</p>
+                        <p className={styles.containername}>Словарь</p>
                         {blocks2.filter((block) => !Object.values(droppedBlocks).includes(block.id)).map((block) => (
                             <DragBlock key={block.id} block={block}/>
                         ))}
@@ -111,21 +92,15 @@ const Level1 = ({setGlobalState}: Level) => {
                             <div className={styles.answercontainer}>
                                 <div className={styles.container2}>
                                     <div className={styles.invblocksgroup}>
-                                        {["drop1", "drop2", "drop3"].map((dropId) => (
-                                            <Slot
-                                                key={dropId}
-                                                id={dropId}
-                                                className={styles.baseBlock}
-                                                onDrop={handleDrop}
-                                                accepts={allowedItems[dropId]}
-                                            />
-                                        ))}
+                                        <div className={styles.dropped}> [0.8, 0.1, 0.1] </div>
+                                        <div className={styles.dropped}> [0.2, 0.7, 0.1] </div>
+                                        <div className={styles.dropped}> [0.1, 0.2, 0.7] </div>
                                     </div>
                                 </div>
 
                                 <div className={styles.container22}>
                                     <div className={styles.invblocksgroup}>
-                                        {["drop4", "drop5", "drop6"].map((dropId) => (
+                                        {["drop1", "drop2", "drop3"].map((dropId) => (
                                             <Slot
                                                 key={dropId}
                                                 id={dropId}
@@ -152,10 +127,10 @@ const Level1 = ({setGlobalState}: Level) => {
                         </div>
                     </div>
                 </div>
-                <Image text={"Добавьте эмбеддинг и позицию к каждому слову в фразе."}/>
+                <Image text={"Перетащите слова в правильном порядке, чтобы собрать перевод"}/>
             </div>
         </div>
     );
 };
 
-export default Level1;
+export default Level5;

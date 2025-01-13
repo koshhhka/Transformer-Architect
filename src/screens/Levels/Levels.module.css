@@ -1,0 +1,51 @@
+.levelheader {
+    display: flex;
+    gap: 720px;
+    padding: 0px 73px;
+}
+
+.homeconteiner {
+    display: flex;
+    align-items: center;
+}
+
+.numoflevel {
+    display: inline-block;
+    margin-top: 45px;
+    margin-bottom: 0px;
+    font-family: Tektur;
+    font-size: 110px;
+    font-weight: 400;
+    line-height: 143px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: white;
+    text-align: center;
+}
+
+.homebutton {
+    position: relative;
+}
+
+.num {
+    opacity: 40%;
+    display: inline-block;
+    margin-top: 45px;
+    margin-bottom: 22px;
+    font-family: Tektur;
+    font-size: 110px;
+    font-weight: 400;
+    line-height: 143px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: white;
+    text-align: center;
+}
+
+.numoflevel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
