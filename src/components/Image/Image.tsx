@@ -1,4 +1,5 @@
 import styles from "./Image.module.css";
+import robot from '/src/assets/robot.svg'
 
 export const Image = ({text}: {text: string}) => {
     return (
@@ -8,7 +9,7 @@ export const Image = ({text}: {text: string}) => {
                     {text}
                 </div>
             </div>
-            <img className={styles.robot} src="/src/assets/robot.svg"></img>
+            <img className={styles.robot} src={robot}></img>
         </div>
     )
 }

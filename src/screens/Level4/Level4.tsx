@@ -6,7 +6,9 @@ import { Block } from "../../types/block.ts";
 import {DragBlock} from "../../components/DragBlock/DragBlock.tsx";
 import {Slot} from "../../components/Slot/Slot.tsx";
 import {Image} from "../../components/Image/Image.tsx";
-
+import homebutton from '/src/assets/homebutton.svg';
+import question from '/src/assets/question.svg';
+import levels from '/src/assets/levels.svg'
 
 const blocks: Block[] = [
     {id: "block1", text: "Softmax", color: "#C203C2"},
@@ -49,14 +51,14 @@ const Level4 = ({setGlobalState}: Level4Props) => {
             <header className={styles.levelheader}>
                 <div className={styles.homeconteiner}>
                     <Link to="/">
-                        <img src="/src/assets/homebutton.svg" className={styles.homebutton} alt="Home"/>
+                        <img src={homebutton} className={styles.homebutton} alt="Home"/>
                     </Link>
                 </div>
-                <p className={styles.numoflevel}>Задание 4</p>
+                <p className={styles.numoflevel}>Задание 1</p>
                 <div className={styles.questionsettings}>
-                    <img src="/src/assets/question.svg" className={styles.questionbutton} alt="Help"/>
+                    <img src={question} className={styles.questionbutton} alt="Help"/>
                     <Link to="/levels">
-                        <img src="/src/assets/levels.svg" className={styles.levelsbutton} alt="Levels"/>
+                        <img src={levels} className={styles.levelsbutton} alt="Levels"/>
                     </Link>
                 </div>
             </header>
