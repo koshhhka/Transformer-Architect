@@ -66,7 +66,7 @@ const Level3 = ({setGlobalState}: Level3Props) => {
                         <img src={homebutton} className={styles.homebutton} alt="Home"/>
                     </Link>
                 </div>
-                <p className={styles.numoflevel}>Задание 1</p>
+                <p className={styles.numoflevel}>Задание 3</p>
                 <div className={styles.questionsettings}>
                     <img src={question} className={styles.questionbutton} alt="Help"/>
                     <Link to="/levels">
